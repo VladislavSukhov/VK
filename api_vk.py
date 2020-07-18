@@ -23,15 +23,18 @@ class User:
         friends_ids = res_json['response']['items']
         return friends_ids
     
-def mutual_friends(user1, user2):
-    m_f = list((set(user1.get_friends()) & set(user2.get_friends())))
-    m_f_list = [User(i) for i in m_f]
-    return m_f_list
+    
+    def __and__(self, other):
+        m_f = list((set(user1.get_friends()) & set(user2.get_friends())))
+        common_friends = [User(i) for i in m_f]
+        return common_friends
 
-    # или можно распечатать ссылки общих друзей
-    # print('Ссылки на общих друзей:')
-    # for i in m_f_list:
-    #     print(i)
+        # или можно распечатать ссылки общих друзей
+        # print('Ссылки на общих друзей:')
+        # for i in common_friends:
+        #     print(i)
+
+
 
 
 
@@ -40,5 +43,6 @@ def mutual_friends(user1, user2):
 user1 = User()
 user2 = User()
 
-print(user1)
-mutual_friends(user1, user2)
+
+common_friends = user1 & user2
+print(common_friends)
